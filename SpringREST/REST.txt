@@ -1,0 +1,35 @@
+REST.txt
+
+  REST? Representational State Transfer(2000-로이필딩)
+  하나의 URI는 하나의 고유한 데이터(리소스)를 대표하도록하는것
+  => REST API를 사용한 개발 Restful한 개발 
+  
+  예전 웹 : 서버에서 데이터 생성 view(브라우저)에서 출력
+  요즘 웹 : 서버에서 데이터 생성 view(브라우저/모바일) 출력(정보 전달)
+  
+  * REST 제약조건
+  1. Client - Server : 요청/제공쪽 모두 표준 인터페이스로 구분(상호독립적)
+  2. StateLess : 클라이언트의 컨텍스트가 서버에 저장X, 클라이언트에 저장O
+  3. Cacheable : 서버의 응답은 캐싱 될 수 있어야하고, 이를 통행 확장성, 성능 개선가능
+  4. Uniform interface : 표준 인터페이스를 통해서 클라이언트, 서버가 각각 구현 
+  5. Layered system : 클라이언트와 서버사이의 부하분산(중계서버)
+  6. Code on demand : JavaApplet/Script등을 클라이언트가 수행가능하도록
+  
+   [Uniform interface]
+   - 리소스가 URI로 식별되어야 함
+   - 리소스 생성,수정,추가할때, HTTP메세지를 통해서 표현
+   - 메세지는 스스로 설명가능함
+   - 애플리케이션의 상태는 하이퍼링크를 통해서 전달 되어야함
+   
+   경로 /customers/{id}에 대한 경로를 정의
+   
+   리소스 URI를 [컬렉션/항목/컬렉션] 보다 더 복잡ㅈ하게 요구하지 않는것이
+   
+   스프링3 -> @ResponseBody
+   스프링4 -> @RestController
+   
+   
+   
+   
+   
+   
