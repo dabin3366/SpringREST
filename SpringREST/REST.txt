@@ -28,8 +28,62 @@ REST.txt
    스프링3 -> @ResponseBody
    스프링4 -> @RestController
    
+   * Http Status 코드
    
+   100번대 : 현재 데이터의 처리중인 상태
+   - 100 : 데이터의 일부를 서버에 전달받은 상태
    
+   200번대 : 정상적인 응답
+   - 200 : 에러없이 정상적으로 처리된 상태
+   - 201 : 요청은 성공적, 결과로 새로운 리소스가 생성된 상태
+   - 204 : 정상처리 후 서버로 보낼데이터 없다.
+   
+   300번대 : 다른 URL처리 (리다이렉션)
+   - 301 Moved Permanently : 요청한 페이지가 새 URL로 변경
+   - 304 Not Modified : 이미 기존의 데이터와 변경사항이 없음
+   
+   400번대 : 서버에서 인식불가능(클라이언트 오류)
+   - 400 Bad Request : 전송된 Request에 문제가 있어서 서버처리 불가능 (ajax)  
+   - 403 Forbidden : 서버에서 접근 불가(접근권한 없이 접근)
+   - 404 Not Found : URL에 해당하는 리소스(페이지)가 찾을 수 없음
+   - 405 Method Not Allowed : 전달방식이 다른 타입의 메서드가 없는경우
+   
+   500번대 : 서버 내부의 문제
+   - 500 Internal Server Error : 서버에서 내부 처리시 문제 발생하는 경우
+   - 502 Bad Gateway : 게이트웨이/프록시 상태의 문제(과부하..)
+   - 503 Service Unavailable : 일시적 과부화, 서비스 중단상태
+   - 504 Gateway Timeout : 지정된 처리시간이 지나서 처리 불가
+   
+   * REST방식 게시판 작성
+   
+   주소 설정 : [컬렉션/항목/컬렉션]
+      => /작업(동작명)/기본키
+      => /작업(동작명)/메서드
+      => /작업(동작명)/데이터
+   
+     작업(동작명) : 요청하는 작업의 종류(명사) members/boards/order/goods
+     기본키 : 요청작업에 필요한 해당 대상의 기본값
+     데이터 : 기능 수행에 필요한 데이터값(JSON데이터)
+   
+   * HTTP 메서드의미 부여
+     GET 방식 : 조회 (select)
+     POST 방식 : 추가 (create)
+     PUT 방식 : 전체 수정 (update)
+     PATCH 방식 : 일부 수정 (update)
+     DELETE 방식 : 삭제 (delete)
+     
+     게시판
+     
+     글쓰기(C) : /boards + 데이터			(POST)
+     
+     글조회(R) : /boards/100				(GET)
+     
+     글목록 조회(R) : /boards/1/list        (GET)
+     
+     글수정(U) : /boards/100 + 수정데이터	(PUT)
+     
+     글삭제(D) : /boards/100 				(DELETE)
+     
    
    
    

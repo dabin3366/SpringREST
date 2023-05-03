@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+<mapper namespace="com.itwillbs.mapper.BoardMapper">
+	<!-- 컬럼명과 변수명을 매핑(모든 요소) -->
+	<resultMap type="com.itwillbs.domain.BoardVO" id="board">
+		<result property="content" column="content"/>
+	</resultMap>
+	
+	<!-- DB시간조회 -->
+	<select id="getTime" resultType="string">
+		select now()
+	</select>
+	
+	<!-- 글쓰기 -->
+	<insert id="create">
+		insert into tbl_board(title,writer,content) values (#{title},#{writer},#{content})		
+	</insert>
+	
+	<!-- 글 전체 목록조회 -->
+	<select id="listAll" resultType="com.itwillbs.domain.BoardVO">
+		select * from tbl_board 
+		where bno &gt; 0
+	</select>
+	
+	<!-- 게시판 글 조회수 1증가 -->
+	<update id="addViewCnt">
+		update tbl_board set viewcnt = viewcnt + 1 
+		where bno=#{bno}
+	</update>
+	
+	<!-- 게시판 특정 글 조회 -->
+	<select id="getBoard" resultType="BoardVO">
+		select * from tbl_board where bno=#{bno}
+	</select>
+	
+	<!-- 게시판 글 수정하기 -->
+	<update id="modifyBoard">
+		update tbl_board set title=#{title},writer=#{writer},content=#{content} where bno=#{bno}		
+	</update>
+	
+	<!-- 게시판 글 삭제하기 -->
+	<delete id="removeBoard">
+		delete from tbl_board where bno=#{bno}
+	</delete>
+	
+	<!-- 글정보 조회(페이징 처리) -->
+	<select id="listPage" resultType="BoardVO" resultMap="board">
+		select * from tbl_board
+		order by bno desc, regdate desc 
+		limit #{page},10
+	</select>
+	
+	<select id="listCri" resultType="BoardVO" resultMap="board">
+		select * from tbl_board
+		order by bno desc, regdate desc 
+		limit #{pageStart},#{pageSize}
+	</select>
+	
+	<!-- 게시판 글 총 개수 -->
+	<select id="countPage" resultType="int">
+		select count(bno) from tbl_board
+	</select>
+	
+</mapper>
